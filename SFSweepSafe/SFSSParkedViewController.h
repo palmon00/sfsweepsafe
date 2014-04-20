@@ -1,5 +1,5 @@
 //
-//  SFSSViewController.h
+//  SFSSParkedViewController.h
 //  SFSweepSafe
 //
 //  Created by Raymond Louie on 4/17/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFSSViewController : UIViewController
+@interface SFSSParkedViewController : UIViewController
 
 @end
