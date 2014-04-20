@@ -252,8 +252,8 @@
     event.endDate = alarmEndDate;
     event.availability = EKEventAvailabilityBusy;
     event.title = @"Move my car";
-    event.location = [NSString stringWithFormat:@"%@ %@", self.number, self.street];
-    event.notes = [NSString stringWithFormat:@"SF Sweep Safe\nReminder to move your car at %@ %@\n\nStreet cleaning will take place at %@", self.number, self.street, [self.dateFormatter stringFromDate:self.closestStreetCleaningDate]];
+    event.location = [NSString stringWithFormat:@"%@ %@ San Francisco, California", self.number, self.street];
+    event.notes = [NSString stringWithFormat:@"SF Sweep Safe\nReminder to move your car at %@ %@ San Francisco, California\n\nStreet cleaning will take place at %@", self.number, self.street, [self.dateFormatter stringFromDate:self.closestStreetCleaningDate]];
     
     // Add an alarm
     EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:alarmDate];
