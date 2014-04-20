@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
 
+@property (nonatomic) BOOL multipleMatches;
 @property (nonatomic) BOOL didSelectAll;
 
 @end
@@ -35,12 +36,19 @@
 
 -(NSArray *)matchingPlacemarks
 {
-    if (!_matchingPlacemarks && _street && _number) {
+    if (!_matchingPlacemarks) {
+        if (_street && _number) {
         // Retrieve placemarks that begin with the 1st character of the street name
         // and find matches using the street name and address number
         _matchingPlacemarks = [[[SFSSPlacemarkCollection alloc] initWithFile:[NSString stringWithFormat:@"%@", [[_street uppercaseString]substringToIndex:1]]] placemarksFilteredByStreet:[_street uppercaseString] andNumber:_number];
+        } else _matchingPlacemarks = [[NSArray alloc] init];
     }
     return _matchingPlacemarks;
+}
+
+-(BOOL)multipleMatches
+{
+    return [self.matchingPlacemarks count] > 1;
 }
 
 #pragma mark - Lifecycle
@@ -58,6 +66,10 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
+    // If only one match, reset selectedPlacemarks
+    if (!self.multipleMatches) self.selectedPlacemarks = nil;
+    
+    // Update doneBarButton
     [self updateDoneBarButtonState];
 }
 
@@ -65,6 +77,10 @@
 
 -(void)updateDoneBarButtonState
 {
+    // Done button will be hidden if one match, visible otherwise
+    if (!self.multipleMatches) self.doneBarButton.title = @"";
+    else self.doneBarButton.title = @"Done";
+    
     // Done button will be disabled if no placemarks have been selected
     self.doneBarButton.enabled = ([self.selectedPlacemarks count] > 0);
 }
@@ -79,8 +95,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Extra row for entering own values
-    return [self.matchingPlacemarks count] + 2;
+    // Add a row for enter own values and if multiple matches, a row for select all
+    return [self.matchingPlacemarks count] + 1 + self.multipleMatches;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -96,15 +112,15 @@
     cell.detailTextLabel.textColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
     
     // Configure the cell...
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 && self.multipleMatches) {
         cell.textLabel.text = self.didSelectAll ? @"Deselect all" : @"Select all";
         cell.detailTextLabel.text = nil;
         cell.accessoryType = UITableViewCellAccessoryNone;
-    } else if (indexPath.row == [self.matchingPlacemarks count] + 1) {
+    } else if (indexPath.row == [self tableView:tableView numberOfRowsInSection:0] - 1) {
         cell.textLabel.text = @"Enter my own values";
         cell.detailTextLabel.text = nil;
     } else {
-        SFSSPlacemark *placemark = self.matchingPlacemarks[indexPath.row - 1];
+        SFSSPlacemark *placemark = self.matchingPlacemarks[indexPath.row - self.multipleMatches];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ to %@", placemark.fromHourAMPM, placemark.toHourAMPM];
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", placemark.weeksOfMonthType, placemark.date];
     }
@@ -120,17 +136,25 @@
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             if (cell.selected == NO) {
                 cell.selected = YES;
-                [self.selectedPlacemarks addObject:self.matchingPlacemarks[i - 1]];
+                [self.selectedPlacemarks addObject:self.matchingPlacemarks[i - self.multipleMatches]];
             }
         }
         [tableView cellForRowAtIndexPath:indexPath].textLabel.text = @"Deselect all";
         self.didSelectAll = YES;
     } else if ([cellText isEqualToString:@"Enter my own values"]) {
-        // Deselect it in case user returns
+        // Deselect it in case user returns to this screen
         [self.tableView cellForRowAtIndexPath:indexPath].selected = NO;
         [self performSegueWithIdentifier:@"Enter Street Cleaning" sender:nil];
     } else {
-        [self.selectedPlacemarks addObject:self.matchingPlacemarks[indexPath.row - 1]];
+        // if only one match, deselect cell, add placemark and segue
+        if (!self.multipleMatches) {
+            [self.tableView cellForRowAtIndexPath:indexPath].selected = NO;
+            [self.selectedPlacemarks addObject:self.matchingPlacemarks[indexPath.row - self.multipleMatches]];
+            [self performSegueWithIdentifier:@"Selected Street Cleaning" sender:nil];
+        } else {
+            // multiple matches so select cell
+            [self.selectedPlacemarks addObject:self.matchingPlacemarks[indexPath.row - self.multipleMatches]];
+        }
     }
     [self updateDoneBarButtonState];
 }
@@ -143,7 +167,7 @@
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             if (cell.selected == YES) {
                 cell.selected = NO;
-                [self.selectedPlacemarks removeObject:self.matchingPlacemarks[i - 1]];
+                [self.selectedPlacemarks removeObject:self.matchingPlacemarks[i - self.multipleMatches]];
             }
         }
         [tableView cellForRowAtIndexPath:indexPath].textLabel.text = @"Select all";
@@ -151,7 +175,7 @@
     } else if ([cellText isEqualToString:@"Enter my own values"]) {
         // Should never happen
     } else {
-        [self.selectedPlacemarks removeObject:self.matchingPlacemarks[indexPath.row - 1]];
+        [self.selectedPlacemarks removeObject:self.matchingPlacemarks[indexPath.row - self.multipleMatches]];
     }
     [self updateDoneBarButtonState];
 }
