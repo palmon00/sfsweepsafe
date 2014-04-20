@@ -8,7 +8,19 @@
 
 #import "SFSSAppDelegate.h"
 
+@interface SFSSAppDelegate ()
+
+@property (strong, nonatomic, readwrite) EKEventStore *eventStore;
+
+@end
+
 @implementation SFSSAppDelegate
+
+-(EKEventStore *)eventStore
+{
+    if (!_eventStore) _eventStore = [[EKEventStore alloc] init];
+    return _eventStore;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

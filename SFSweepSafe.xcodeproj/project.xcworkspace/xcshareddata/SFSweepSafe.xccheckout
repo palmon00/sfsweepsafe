@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C3122907-EDA8-44CB-A232-F0FB4A34F28A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SFSweepSafe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3466C9E8-B558-4F41-8D24-D1B5CD25331B</key>
+		<string>https://github.com/palmon00/sfsweepsafe</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SFSweepSafe.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3466C9E8-B558-4F41-8D24-D1B5CD25331B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/palmon00/sfsweepsafe</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3466C9E8-B558-4F41-8D24-D1B5CD25331B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3466C9E8-B558-4F41-8D24-D1B5CD25331B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SFSweepSafe</string>
+		</dict>
+	</array>
+</dict>
+</plist>

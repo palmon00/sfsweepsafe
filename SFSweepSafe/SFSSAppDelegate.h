@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <EventKit/EventKit.h>
 
 @interface SFSSAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic, readonly) EKEventStore *eventStore;
 
 @end

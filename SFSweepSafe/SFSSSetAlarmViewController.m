@@ -8,6 +8,8 @@
 
 #import "SFSSSetAlarmViewController.h"
 #import "SFSSPlacemark.h"
+#import <EventKit/EventKit.h>
+#import "SFSSAppDelegate.h"
 
 @interface SFSSSetAlarmViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *warningTextView;
@@ -17,6 +19,8 @@
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDate *closestStreetCleaningDate;
+
+@property (strong, nonatomic) NSCalendar *gregorian;
 
 @end
 
@@ -42,11 +46,8 @@
         // Get the current date
         NSDate *today = [NSDate date];
         
-        // Get gregorian calendar
-        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        
         // Get the current year, month, day, hour
-        NSDateComponents *allComponents = [gregorian components:NSEraCalendarUnit |
+        NSDateComponents *allComponents = [self.gregorian components:NSEraCalendarUnit |
                                            NSYearCalendarUnit |
                                            NSMonthCalendarUnit |
                                            NSDayCalendarUnit |
@@ -97,55 +98,55 @@
                 // add street cleaning date
                 [components setMonth:currentMonth];
                 [components setWeekdayOrdinal:1]; // 1st week of month
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
                 
                 // add street cleaning date for next month
                 [components setMonth:(currentMonth + 1)];
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
             }
             
             if (placemark.week2ofMonth) {
                 // add street cleaning date for this month
                 [components setMonth:currentMonth];
                 [components setWeekdayOrdinal:2]; // 2nd week of month
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
                 
                 // add street cleaning date for next month
                 [components setMonth:(currentMonth + 1)];
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
             }
             
             if (placemark.week3ofMonth) {
                 // add street cleaning date
                 [components setMonth:currentMonth];
                 [components setWeekdayOrdinal:3]; // 3rd week of month
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
                 
                 // add street cleaning date for next month
                 [components setMonth:(currentMonth + 1)];
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
             }
             
             if (placemark.week4ofMonth) {
                 // add street cleaning date
                 [components setMonth:currentMonth];
                 [components setWeekdayOrdinal:4]; // 4th week of month
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
                 
                 // add street cleaning date for next month
                 [components setMonth:(currentMonth + 1)];
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
             }
             
             if (placemark.week5ofMonth) {
                 // add street cleaning date
                 [components setMonth:currentMonth];
                 [components setWeekdayOrdinal:5]; // 5th week of month
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
                 
                 // add street cleaning date for next month
                 [components setMonth:(currentMonth + 1)];
-                [streetCleaningDates addObject:[gregorian dateFromComponents:components]];
+                [streetCleaningDates addObject:[self.gregorian dateFromComponents:components]];
             }
         }
         // find closest streetCleaningDate
@@ -165,6 +166,11 @@
     return _closestStreetCleaningDate;
 }
 
+-(NSCalendar *)gregorian
+{
+    if (!_gregorian) _gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    return _gregorian;
+}
 
 - (void)viewDidLoad
 {
@@ -208,14 +214,74 @@
         }
     }
     
-    // Set alarm for closetsStreetCleaningDate
+    // Try to set a calendar event
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate isKindOfClass:[SFSSAppDelegate class]]) {
+        EKEventStore *eventStore = [delegate eventStore];
+        [eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
+            if (!error) {
+                if (granted) {
+                    // Permission granted; set a reminder
+                    EKReminder *reminder = [EKReminder reminderWithEventStore:eventStore];
+                    reminder.startDateComponents = [self.gregorian components:NSEraCalendarUnit |
+                                                    NSYearCalendarUnit |
+                                                    NSMonthCalendarUnit |
+                                                    NSDayCalendarUnit |
+                                                    NSHourCalendarUnit |
+                                                    NSMinuteCalendarUnit |
+                                                    NSSecondCalendarUnit |
+                                                    NSWeekCalendarUnit |
+                                                    NSWeekdayCalendarUnit |
+                                                    NSWeekdayOrdinalCalendarUnit |
+                                                    NSQuarterCalendarUnit |
+                                                    NSWeekOfMonthCalendarUnit |
+                                                    NSWeekOfYearCalendarUnit |
+                                                    NSYearForWeekOfYearCalendarUnit |
+                                                    NSCalendarCalendarUnit |
+                                                    NSTimeZoneCalendarUnit fromDate:alarmDate];
+                    reminder.dueDateComponents = reminder.startDateComponents;
+                    reminder.calendar = [eventStore defaultCalendarForNewReminders];
+                    EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:alarmDate];
+                    [reminder addAlarm:alarm];
+                    NSError *error = nil;
+                    BOOL success = [eventStore saveReminder:reminder commit:YES error:&error];
+                    if (!error) {
+                        if (success) {
+                            // Update alarm summary view
+                            NSString *newAlarmText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
+                                self.doneBarButton.enabled = YES;
+                            });
+                        } else {
+                            NSLog(@"saveReminder not successful");
+                            [self scheduleLocalNotif:alarmDate];
+                        }
+                    } else {
+                        // Error occurred saving
+                        NSLog(@"%@", error);
+                        [self scheduleLocalNotif:alarmDate];
+                    }
+                } else {
+                    // Permission not granted
+                    NSLog(@"requestAccessToEntityType permission not granted");
+                    [self scheduleLocalNotif:alarmDate];
+                }
+            } else {
+                NSLog(@"%@", error);
+                [self scheduleLocalNotif:alarmDate];
+            }
+        }];
+    }
+}
+
+#pragma mark - Local Notif
+
+- (void)scheduleLocalNotif:(NSDate *)alarmDate
+{
+    // Error saving, permission not granted or error requesting access; set a local notif
+    // Set a local notification for closetsStreetCleaningDate
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    
-    // Update alarm summary view
-    NSString *newAlarmText = [NSString stringWithFormat:@"Alarm set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
-    self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
-    
-    [self.alarmSummaryTextView scrollRangeToVisible:[self.alarmSummaryTextView.text rangeOfString:newAlarmText]];
     
     // Configure alarm
     localNotif.fireDate = alarmDate;
@@ -224,7 +290,12 @@
     localNotif.alertLaunchImage = @"SFStreetSweeping152.png";
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     
-    self.doneBarButton.enabled = YES;
+    // Update alarm summary view
+    NSString *newAlarmText = [NSString stringWithFormat:@"Alarm set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
+        self.doneBarButton.enabled = YES;
+    });
 }
 
 - (IBAction)doneBarButtonPressed:(UIBarButtonItem *)sender {
