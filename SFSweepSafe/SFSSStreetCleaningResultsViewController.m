@@ -166,8 +166,12 @@
     if ([segue.identifier isEqualToString:@"Selected Street Cleaning"]) {
         SFSSSetAlarmViewController *savc = segue.destinationViewController;
         savc.placemarks = self.selectedPlacemarks;
-        savc.number= self.number;
+        savc.number = self.number;
         savc.street = self.street;
+    } else if ([segue.identifier isEqualToString:@"Enter Street Cleaning"]) {
+        SFSSEnterStreetCleaningViewController *escvc = segue.destinationViewController;
+        escvc.number = self.number;
+        escvc.street = self.street;
     }
 }
 - (IBAction)doneBarButtonPressed:(UIBarButtonItem *)sender {

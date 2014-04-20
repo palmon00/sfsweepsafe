@@ -154,8 +154,6 @@
                 break;
         }
         
-        // If 
-        
         SFSSPlacemark *placemark = [[SFSSPlacemark alloc] initWithNumber:self.number street:self.street date:date fromHour:fromHour toHour:toHour weeksOfMonthType:weeksOfMonth];
         
         SFSSSetAlarmViewController *savc = segue.destinationViewController;

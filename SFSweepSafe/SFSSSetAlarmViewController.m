@@ -214,70 +214,75 @@
         }
     }
     
-    // Try to set a calendar event
+    // Set a calendar event or local notif
     id delegate = [[UIApplication sharedApplication] delegate];
     if ([delegate isKindOfClass:[SFSSAppDelegate class]]) {
         EKEventStore *eventStore = [delegate eventStore];
-        [eventStore requestAccessToEntityType:EKEntityTypeReminder completion:^(BOOL granted, NSError *error) {
+        [eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
             if (!error) {
                 if (granted) {
-                    // Permission granted; set a reminder
-                    EKReminder *reminder = [EKReminder reminderWithEventStore:eventStore];
-                    reminder.startDateComponents = [self.gregorian components:NSEraCalendarUnit |
-                                                    NSYearCalendarUnit |
-                                                    NSMonthCalendarUnit |
-                                                    NSDayCalendarUnit |
-                                                    NSHourCalendarUnit |
-                                                    NSMinuteCalendarUnit |
-                                                    NSSecondCalendarUnit |
-                                                    NSWeekCalendarUnit |
-                                                    NSWeekdayCalendarUnit |
-                                                    NSWeekdayOrdinalCalendarUnit |
-                                                    NSQuarterCalendarUnit |
-                                                    NSWeekOfMonthCalendarUnit |
-                                                    NSWeekOfYearCalendarUnit |
-                                                    NSYearForWeekOfYearCalendarUnit |
-                                                    NSCalendarCalendarUnit |
-                                                    NSTimeZoneCalendarUnit fromDate:alarmDate];
-                    reminder.dueDateComponents = reminder.startDateComponents;
-                    reminder.calendar = [eventStore defaultCalendarForNewReminders];
-                    EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:alarmDate];
-                    [reminder addAlarm:alarm];
-                    NSError *error = nil;
-                    BOOL success = [eventStore saveReminder:reminder commit:YES error:&error];
-                    if (!error) {
-                        if (success) {
-                            // Update alarm summary view
-                            NSString *newAlarmText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
-                                self.doneBarButton.enabled = YES;
-                            });
-                        } else {
-                            NSLog(@"saveReminder not successful");
-                            [self scheduleLocalNotif:alarmDate];
-                        }
-                    } else {
-                        // Error occurred saving
-                        NSLog(@"%@", error);
-                        [self scheduleLocalNotif:alarmDate];
-                    }
+                    if ([self scheduleEventForDate:alarmDate withEventStore:eventStore]) return;
                 } else {
                     // Permission not granted
                     NSLog(@"requestAccessToEntityType permission not granted");
-                    [self scheduleLocalNotif:alarmDate];
                 }
             } else {
+                // Error occurred requesting access
                 NSLog(@"%@", error);
-                [self scheduleLocalNotif:alarmDate];
             }
+            // Schedule a local notif if event fails
+            [self scheduleLocalNotifForDate:alarmDate];
         }];
+    } else {
+        // Schedule a local notif if app delegate is not SFSSAppDelegate
+        [self scheduleLocalNotifForDate:alarmDate];
     }
 }
 
 #pragma mark - Local Notif
 
-- (void)scheduleLocalNotif:(NSDate *)alarmDate
+- (BOOL)scheduleEventForDate:(NSDate *)alarmDate withEventStore:(EKEventStore *)eventStore
+{
+    // Set an event (1/2 hr in duration)
+    NSDate *alarmEndDate = [NSDate dateWithTimeInterval:ONE_DAY/48 sinceDate:alarmDate];
+    
+    EKEvent *event = [EKEvent eventWithEventStore:eventStore];
+    event.calendar = [eventStore defaultCalendarForNewEvents];
+    event.startDate = alarmDate;
+    event.endDate = alarmEndDate;
+    event.availability = EKEventAvailabilityBusy;
+    event.title = @"Move my car";
+    event.location = [NSString stringWithFormat:@"%@ %@", self.number, self.street];
+    event.notes = [NSString stringWithFormat:@"SF Sweep Safe\nReminder to move your car at %@ %@\n\nStreet cleaning will take place at %@", self.number, self.street, [self.dateFormatter stringFromDate:self.closestStreetCleaningDate]];
+    
+    // Add an alarm
+    EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:alarmDate];
+    [event addAlarm:alarm];
+    
+    // Save event
+    NSError *error = nil;
+    BOOL success = [eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&error];
+    if (!error) {
+        if (success) {
+            // Update alarm summary view
+            NSString *newAlarmText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
+                self.doneBarButton.enabled = YES;
+            });
+            return YES;
+        } else {
+            // Not successful
+            NSLog(@"saveEvent not successful");
+        }
+    } else {
+        // Error occurred saving
+        NSLog(@"%@", error);
+    }
+    return NO;
+}
+
+- (void)scheduleLocalNotifForDate:(NSDate *)alarmDate
 {
     // Error saving, permission not granted or error requesting access; set a local notif
     // Set a local notification for closetsStreetCleaningDate
@@ -291,7 +296,7 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     
     // Update alarm summary view
-    NSString *newAlarmText = [NSString stringWithFormat:@"Alarm set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
+    NSString *newAlarmText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
         self.doneBarButton.enabled = YES;
