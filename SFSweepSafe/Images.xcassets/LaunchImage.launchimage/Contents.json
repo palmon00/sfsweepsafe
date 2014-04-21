@@ -22,7 +22,6 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "SF_Bay_Unsplash_1536_Left-1.png",
       "scale" : "1x"
     },
     {
@@ -30,7 +29,6 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "SF_Bay_Unsplash_iPad_Landscape_1024.png",
       "scale" : "1x"
     },
     {
@@ -38,7 +36,6 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "SF_Bay_Unsplash_1536_Left.png",
       "scale" : "2x"
     },
     {
@@ -46,7 +43,6 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "SF_Bay_Unsplash_iPad_Landscape_2048.png",
       "scale" : "2x"
     },
     {
