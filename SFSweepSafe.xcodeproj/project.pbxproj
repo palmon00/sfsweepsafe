@@ -67,9 +67,9 @@
 		1E8E0E2C1901042C00DBC329 /* Z in Resources */ = {isa = PBXBuildFile; fileRef = 1E8E0E081901042C00DBC329 /* Z */; };
 		1E8E0E2E190104AE00DBC329 /* SFStreetSweeping152.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E8E0E2D190104AE00DBC329 /* SFStreetSweeping152.png */; };
 		1E9C427A1904CF7700E10BCA /* SF_Bay_Unsplash_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42761904CF7700E10BCA /* SF_Bay_Unsplash_Left.png */; };
-		1E9C427B1904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42771904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Left.png */; };
-		1E9C427C1904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42781904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Right.png */; };
 		1E9C427D1904CF7700E10BCA /* SF_Bay_Unsplash_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42791904CF7700E10BCA /* SF_Bay_Unsplash_Right.png */; };
+		1E9C42821904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42801904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Left.png */; };
+		1E9C42831904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42811904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Right.png */; };
 		1EC42FD219033D5900853297 /* home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1EC42FCF19033D5900853297 /* home.gpx */; };
 		1EC42FD319033D5900853297 /* west.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1EC42FD019033D5900853297 /* west.gpx */; };
 		1EC42FD519033E6400853297 /* mission.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1EC42FD419033E6400853297 /* mission.gpx */; };
@@ -166,9 +166,9 @@
 		1E8E0E081901042C00DBC329 /* Z */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Z; sourceTree = "<group>"; };
 		1E8E0E2D190104AE00DBC329 /* SFStreetSweeping152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SFStreetSweeping152.png; sourceTree = "<group>"; };
 		1E9C42761904CF7700E10BCA /* SF_Bay_Unsplash_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Left.png; sourceTree = "<group>"; };
-		1E9C42771904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Mid_Left.png; sourceTree = "<group>"; };
-		1E9C42781904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Mid_Right.png; sourceTree = "<group>"; };
 		1E9C42791904CF7700E10BCA /* SF_Bay_Unsplash_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Right.png; sourceTree = "<group>"; };
+		1E9C42801904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Mid_Left.png; sourceTree = "<group>"; };
+		1E9C42811904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Mid_Right.png; sourceTree = "<group>"; };
 		1EC42FCF19033D5900853297 /* home.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = home.gpx; sourceTree = "<group>"; };
 		1EC42FD019033D5900853297 /* west.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = west.gpx; sourceTree = "<group>"; };
 		1EC42FD419033E6400853297 /* mission.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mission.gpx; sourceTree = "<group>"; };
@@ -273,9 +273,9 @@
 		1E7390A8190098F700191E0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E9C42801904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Left.png */,
+				1E9C42811904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Right.png */,
 				1E9C42761904CF7700E10BCA /* SF_Bay_Unsplash_Left.png */,
-				1E9C42771904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Left.png */,
-				1E9C42781904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Right.png */,
 				1E9C42791904CF7700E10BCA /* SF_Bay_Unsplash_Right.png */,
 				1E8E0E2D190104AE00DBC329 /* SFStreetSweeping152.png */,
 				1EC42FCF19033D5900853297 /* home.gpx */,
@@ -443,7 +443,7 @@
 				1E8E0E191901042C00DBC329 /* H in Resources */,
 				1E8E0E261901042C00DBC329 /* T in Resources */,
 				1E8E0E121901042C00DBC329 /* A in Resources */,
-				1E9C427B1904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Left.png in Resources */,
+				1E9C42821904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Left.png in Resources */,
 				1E8E0E0B1901042C00DBC329 /* 3 in Resources */,
 				1E8E0E1B1901042C00DBC329 /* J in Resources */,
 				1EC42FD319033D5900853297 /* west.gpx in Resources */,
@@ -471,7 +471,7 @@
 				1E8E0E2B1901042C00DBC329 /* Y in Resources */,
 				1E8E0E171901042C00DBC329 /* F in Resources */,
 				1E7390B5190098F700191E0F /* Main_iPhone.storyboard in Resources */,
-				1E9C427C1904CF7700E10BCA /* SF_Bay_Unsplash_Mid_Right.png in Resources */,
+				1E9C42831904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Right.png in Resources */,
 				1E8E0E0A1901042C00DBC329 /* 2 in Resources */,
 				1E8E0E141901042C00DBC329 /* C in Resources */,
 				1E8E0E251901042C00DBC329 /* Streets in Resources */,
