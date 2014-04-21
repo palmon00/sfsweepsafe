@@ -267,7 +267,7 @@
             // Update alarm summary view
             NSString *newAlarmText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
+            self.alarmSummaryTextView.text = [self.alarmSummaryTextView.text stringByAppendingString:newAlarmText];
                 self.doneBarButton.enabled = YES;
             });
             return YES;
@@ -298,7 +298,7 @@
     // Update alarm summary view
     NSString *newAlarmText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:alarmDate]];
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.alarmSummaryTextView.text = [newAlarmText stringByAppendingString:self.alarmSummaryTextView.text];
+        self.alarmSummaryTextView.text = [self.alarmSummaryTextView.text stringByAppendingString:newAlarmText];
         self.doneBarButton.enabled = YES;
     });
 }
