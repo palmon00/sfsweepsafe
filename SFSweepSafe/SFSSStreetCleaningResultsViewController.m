@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *selectedPlacemarks; // of SFSSPlacemark
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
+@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
 
 @property (nonatomic) BOOL multipleMatches;
 @property (nonatomic) BOOL didSelectAll;
@@ -62,6 +63,8 @@
     
     self.tableView.allowsMultipleSelection = YES;
     self.didSelectAll = NO;
+    
+    if (![self.matchingPlacemarks count]) self.instructionsLabel.text = @"No matching street cleaning times";
 }
 
 -(void)viewDidAppear:(BOOL)animated

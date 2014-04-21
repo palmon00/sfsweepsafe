@@ -136,7 +136,7 @@
         // Check for userLocation
         if (self.userLocation) {
             
-            self.searchingLabel.text = @"Determining address...";
+            self.searchingLabel.text = @"Determining your address...";
             
             // If found, check for address
             CLGeocoder *geocoder = [[CLGeocoder alloc] init];

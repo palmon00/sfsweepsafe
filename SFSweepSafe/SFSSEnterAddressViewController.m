@@ -46,11 +46,24 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    
     [self loadStreets];
     [self.streetTableView reloadData];
     
     // Start with data entry in number text field
     [self.numberTextField becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Store original frames for animation
+    self.streetSearchBarOriginalFrame = self.streetSearchBar.frame;
+    NSLog(@"streetSearchBarOriginalFrame %@", NSStringFromCGRect(self.streetSearchBarOriginalFrame));
+    self.streetTableViewOriginalFrame = self.streetTableView.frame;
+    NSLog(@"streetTableViewOriginalFrame %@", NSStringFromCGRect(self.streetTableViewOriginalFrame));
 }
 
 - (void)didReceiveMemoryWarning
@@ -156,11 +169,7 @@
     if (!self.searchBarAnimatedUp) { // Prevent double animation
         self.searchBarAnimatedUp = YES;
         
-        // Store original frames and animate up
-        self.streetSearchBarOriginalFrame = self.streetSearchBar.frame;
-        NSLog(@"streetSearchBarOriginalFrame %@", NSStringFromCGRect(self.streetSearchBarOriginalFrame));
-        self.streetTableViewOriginalFrame = self.streetTableView.frame;
-        NSLog(@"streetTableViewOriginalFrame %@", NSStringFromCGRect(self.streetTableViewOriginalFrame));
+        // Animate up
         [UIView animateWithDuration:0.5 animations:^{
             self.streetSearchBar.frame = CGRectMake(0, 0, self.streetSearchBar.frame.size.width, self.streetSearchBar.frame.size.height);
             NSLog(@"self.streetSearchBar.frame %@", NSStringFromCGRect(self.streetSearchBar.frame));

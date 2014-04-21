@@ -287,6 +287,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="doneBarButton" destination="rVD-YQ-BHP" id="V31-sC-OOL"/>
+                        <outlet property="instructionsLabel" destination="Gla-0x-7CQ" id="Ybi-Xf-9sL"/>
                         <outlet property="tableView" destination="Nkw-hq-cR7" id="0tU-RI-Hkp"/>
                         <segue destination="qSc-2c-5Jt" kind="push" identifier="Enter Street Cleaning" id="NYd-vN-npn"/>
                         <segue destination="3H7-b8-ZAe" kind="push" identifier="Selected Street Cleaning" id="7Ey-dV-KxO"/>
@@ -578,8 +579,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fpH-Rs-KPD"/>
         <segue reference="P19-xc-D89"/>
-        <segue reference="C6e-s1-oUy"/>
+        <segue reference="fpH-Rs-KPD"/>
+        <segue reference="7Ey-dV-KxO"/>
     </inferredMetricsTieBreakers>
 </document>
