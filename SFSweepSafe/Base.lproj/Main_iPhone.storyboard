@@ -345,10 +345,10 @@
             </objects>
             <point key="canvasLocation" x="2466" y="-213"/>
         </scene>
-        <!--Set Alarm View Controller - Set Alarm-->
+        <!--Set Reminder View Controller - Set Reminder-->
         <scene sceneID="kOe-MF-379">
             <objects>
-                <viewController id="3H7-b8-ZAe" customClass="SFSSSetAlarmViewController" sceneMemberID="viewController">
+                <viewController id="3H7-b8-ZAe" customClass="SFSSSetReminderViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r2U-ET-Pja"/>
                         <viewControllerLayoutGuide type="bottom" id="EM8-BT-uSG"/>
@@ -411,7 +411,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="setAlarmButtonPressed:" destination="3H7-b8-ZAe" eventType="touchUpInside" id="GVa-Ts-Kw3"/>
+                                    <action selector="setreminderButtonPressed:" destination="3H7-b8-ZAe" eventType="touchUpInside" id="59M-wc-jEc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -442,7 +442,7 @@
                             <constraint firstItem="Yrg-kQ-PKg" firstAttribute="leading" secondItem="HYB-7n-RgJ" secondAttribute="leading" constant="20" symbolic="YES" id="zRV-ia-HgE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Set Alarm" id="TTp-L8-z5y">
+                    <navigationItem key="navigationItem" title="Set Reminder" id="TTp-L8-z5y">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="Gcw-ql-PfD">
                             <connections>
                                 <action selector="doneBarButtonPressed:" destination="3H7-b8-ZAe" id="EFo-7a-Cmw"/>
@@ -450,9 +450,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="alarmIntervalSegmentedControl" destination="ZKT-wl-2sa" id="Egp-ZL-q77"/>
-                        <outlet property="alarmSummaryTextView" destination="KlM-rj-dZp" id="mr2-zT-m7l"/>
                         <outlet property="doneBarButton" destination="Gcw-ql-PfD" id="T9A-bt-k9y"/>
+                        <outlet property="reminderIntervalSegmentedControl" destination="ZKT-wl-2sa" id="kcK-Ep-R7C"/>
+                        <outlet property="reminderSummaryTextView" destination="KlM-rj-dZp" id="Mlg-f6-8tN"/>
                         <outlet property="warningTextView" destination="a9j-w5-dv2" id="fV4-ob-Lxm"/>
                     </connections>
                 </viewController>

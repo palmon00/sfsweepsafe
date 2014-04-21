@@ -83,9 +83,9 @@
 -(NSString *)hourAMPM:(NSInteger)hour
 {
     if (hour == 0 || hour == 24) return @"12 A.M.";
-    else if (hour < 12) return [NSString stringWithFormat:@"%ld A.M.", (long)hour];
+    else if (hour < 12) return [NSString stringWithFormat:@"%d A.M.", (int)hour];
     else if (hour == 12) return @"12 P.M.";
-    else if (hour < 24) return [NSString stringWithFormat:@"%ld P.M.", hour - 12];
+    else if (hour < 24) return [NSString stringWithFormat:@"%d P.M.", (int)hour - 12];
     return nil;
 }
 

@@ -1,5 +1,5 @@
 //
-//  SFSSSetAlarmViewController.h
+//  SFSSSetReminderViewController.h
 //  SFSweepSafe
 //
 //  Created by Raymond Louie on 4/17/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class SFSSPlacemark;
 
-@interface SFSSSetAlarmViewController : UIViewController
+@interface SFSSSetReminderViewController : UIViewController
 
 @property (strong, nonatomic) NSString *number;
 @property (strong, nonatomic) NSString *street;

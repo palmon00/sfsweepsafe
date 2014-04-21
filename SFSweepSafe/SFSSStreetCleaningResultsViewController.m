@@ -10,7 +10,7 @@
 #import "SFSSPlacemarkCollection.h"
 #import "SFSSPlacemark.h"
 #import "SFSSEnterStreetCleaningViewController.h"
-#import "SFSSSetAlarmViewController.h"
+#import "SFSSSetReminderViewController.h"
 
 @interface SFSSStreetCleaningResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -191,7 +191,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"Selected Street Cleaning"]) {
-        SFSSSetAlarmViewController *savc = segue.destinationViewController;
+        SFSSSetReminderViewController *savc = segue.destinationViewController;
         savc.placemarks = self.selectedPlacemarks;
         savc.number = self.number;
         savc.street = self.street;

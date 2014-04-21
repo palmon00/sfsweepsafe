@@ -8,7 +8,7 @@
 
 #import "SFSSEnterStreetCleaningViewController.h"
 #import "SFSSPlacemark.h"
-#import "SFSSSetAlarmViewController.h"
+#import "SFSSSetReminderViewController.h"
 
 @interface SFSSEnterStreetCleaningViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *fromHourTextField;
@@ -56,10 +56,10 @@
     
     if (fromHour <= 10) {
         // toHour is 2 hours later and in same AMPM
-        self.toHourTextField.text = [NSString stringWithFormat:@"%ld", fromHour + 2];
+        self.toHourTextField.text = [NSString stringWithFormat:@"%d", (int)fromHour + 2];
     } else {
         // toHour is 10 hours behind for 11 and 12
-        self.toHourTextField.text = [NSString stringWithFormat:@"%ld", fromHour - 10];
+        self.toHourTextField.text = [NSString stringWithFormat:@"%d", (int)fromHour - 10];
     }
     
     // toHour is inverse of fromHour for 10 and 11
@@ -156,7 +156,7 @@
         
         SFSSPlacemark *placemark = [[SFSSPlacemark alloc] initWithNumber:self.number street:self.street date:date fromHour:fromHour toHour:toHour weeksOfMonthType:weeksOfMonth];
         
-        SFSSSetAlarmViewController *savc = segue.destinationViewController;
+        SFSSSetReminderViewController *savc = segue.destinationViewController;
         savc.placemarks = @[placemark];
         savc.number = self.number;
         savc.street = self.street;

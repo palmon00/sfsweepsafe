@@ -28,7 +28,7 @@
 		1E7390E91900D81400191E0F /* SFSSPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7390E81900D81400191E0F /* SFSSPlacemark.m */; };
 		1E8E0DDD1900DE0E00DBC329 /* SFSSPlacemarkCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E0DDC1900DE0E00DBC329 /* SFSSPlacemarkCollection.m */; };
 		1E8E0DE01900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E0DDF1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.m */; };
-		1E8E0DE31900ED4600DBC329 /* SFSSSetAlarmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E0DE21900ED4600DBC329 /* SFSSSetAlarmViewController.m */; };
+		1E8E0DE31900ED4600DBC329 /* SFSSSetReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E8E0DE21900ED4600DBC329 /* SFSSSetReminderViewController.m */; };
 		1E8E0E091901042C00DBC329 /* 1 in Resources */ = {isa = PBXBuildFile; fileRef = 1E8E0DE51901042C00DBC329 /* 1 */; };
 		1E8E0E0A1901042C00DBC329 /* 2 in Resources */ = {isa = PBXBuildFile; fileRef = 1E8E0DE61901042C00DBC329 /* 2 */; };
 		1E8E0E0B1901042C00DBC329 /* 3 in Resources */ = {isa = PBXBuildFile; fileRef = 1E8E0DE71901042C00DBC329 /* 3 */; };
@@ -126,8 +126,8 @@
 		1E8E0DDC1900DE0E00DBC329 /* SFSSPlacemarkCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSSPlacemarkCollection.m; sourceTree = "<group>"; };
 		1E8E0DDE1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSSEnterStreetCleaningViewController.h; sourceTree = "<group>"; };
 		1E8E0DDF1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSSEnterStreetCleaningViewController.m; sourceTree = "<group>"; };
-		1E8E0DE11900ED4600DBC329 /* SFSSSetAlarmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSSSetAlarmViewController.h; sourceTree = "<group>"; };
-		1E8E0DE21900ED4600DBC329 /* SFSSSetAlarmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSSSetAlarmViewController.m; sourceTree = "<group>"; };
+		1E8E0DE11900ED4600DBC329 /* SFSSSetReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSSSetReminderViewController.h; sourceTree = "<group>"; };
+		1E8E0DE21900ED4600DBC329 /* SFSSSetReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSSSetReminderViewController.m; sourceTree = "<group>"; };
 		1E8E0DE51901042C00DBC329 /* 1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1; sourceTree = "<group>"; };
 		1E8E0DE61901042C00DBC329 /* 2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 2; sourceTree = "<group>"; };
 		1E8E0DE71901042C00DBC329 /* 3 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 3; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 				1EE12C6A19021F7500EE24CE /* SFSSRootViewController.m */,
 				1EE12C6619021E6700EE24CE /* SFSSPageContentViewController.h */,
 				1EE12C6719021E6700EE24CE /* SFSSPageContentViewController.m */,
-				1E8E0DE11900ED4600DBC329 /* SFSSSetAlarmViewController.h */,
-				1E8E0DE21900ED4600DBC329 /* SFSSSetAlarmViewController.m */,
+				1E8E0DE11900ED4600DBC329 /* SFSSSetReminderViewController.h */,
+				1E8E0DE21900ED4600DBC329 /* SFSSSetReminderViewController.m */,
 				1E8E0DDE1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.h */,
 				1E8E0DDF1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.m */,
 				1E7390E41900B48B00191E0F /* SFSSStreetCleaningResultsViewController.h */,
@@ -507,7 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E8E0DE31900ED4600DBC329 /* SFSSSetAlarmViewController.m in Sources */,
+				1E8E0DE31900ED4600DBC329 /* SFSSSetReminderViewController.m in Sources */,
 				1E7390AE190098F700191E0F /* main.m in Sources */,
 				1E7390B2190098F700191E0F /* SFSSAppDelegate.m in Sources */,
 				1E7390E91900D81400191E0F /* SFSSPlacemark.m in Sources */,
