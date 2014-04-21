@@ -36,8 +36,6 @@
     self.streetTableView.dataSource = self;
     self.streetTableView.delegate = self;
     self.streetSearchBar.delegate = self;
-
-    self.searchBarAnimatedUp = NO;
     
     // Set fonts
     self.numberTextField.font = [UIFont fontWithName:@"Copperplate" size:14.0];
@@ -64,6 +62,10 @@
     NSLog(@"streetSearchBarOriginalFrame %@", NSStringFromCGRect(self.streetSearchBarOriginalFrame));
     self.streetTableViewOriginalFrame = self.streetTableView.frame;
     NSLog(@"streetTableViewOriginalFrame %@", NSStringFromCGRect(self.streetTableViewOriginalFrame));
+    
+    // Search bar is always down when view appears
+    self.searchBarAnimatedUp = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning
