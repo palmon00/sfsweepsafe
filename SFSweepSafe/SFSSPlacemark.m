@@ -32,7 +32,7 @@
 
 +(NSArray *)dates
 {
-    return @[@"Sun", @"Mon", @"Tues", @"Wed", @"Thu", @"Fri", @"Sat", @"Day"];
+    return @[@"Sun", @"Mon", @"Tues", @"Wed", @"Thu", @"Fri", @"Sat"];
 }
 
 -(NSString *)weeksOfMonthType

@@ -32,9 +32,10 @@
     pageControl.backgroundColor = [UIColor whiteColor];
     
     // setup nav bar
-    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0],
+     @{NSForegroundColorAttributeName : [UIColor whiteColor],// colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0],
        NSFontAttributeName : [UIFont fontWithName:@"Copperplate" size:20.0]}];
     
     // Change bar button item fonts

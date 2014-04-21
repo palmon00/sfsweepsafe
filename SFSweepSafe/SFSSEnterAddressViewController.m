@@ -10,11 +10,14 @@
 #import "SFSSStreetCleaningResultsViewController.h"
 
 @interface SFSSEnterAddressViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 @property (weak, nonatomic) IBOutlet UISearchBar *streetSearchBar;
-@property (weak, nonatomic) IBOutlet UISearchBar *streetTextField;
 @property (weak, nonatomic) IBOutlet UITableView *streetTableView;
 
+
+@property (nonatomic) CGRect instructionsLabelOriginalFrame;
+@property (nonatomic) CGRect numberTextFieldOriginalFrame;
 @property (nonatomic) CGRect streetSearchBarOriginalFrame;
 @property (nonatomic) CGRect streetTableViewOriginalFrame;
 
@@ -58,14 +61,13 @@
     [super viewDidAppear:animated];
     
     // Store original frames for animation
+    self.instructionsLabelOriginalFrame = self.instructionsLabel.frame;
+    self.numberTextFieldOriginalFrame = self.numberTextField.frame;
     self.streetSearchBarOriginalFrame = self.streetSearchBar.frame;
-    NSLog(@"streetSearchBarOriginalFrame %@", NSStringFromCGRect(self.streetSearchBarOriginalFrame));
     self.streetTableViewOriginalFrame = self.streetTableView.frame;
-    NSLog(@"streetTableViewOriginalFrame %@", NSStringFromCGRect(self.streetTableViewOriginalFrame));
     
     // Search bar is always down when view appears
     self.searchBarAnimatedUp = NO;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -130,8 +132,8 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"Copperplate" size:10.0];
     
     // Set color
-    cell.textLabel.textColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
-    cell.detailTextLabel.textColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
+    cell.textLabel.textColor = [UIColor TINT_COLOR]; // colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
+    cell.detailTextLabel.textColor = [UIColor TINT_COLOR]; // colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
     
     if (self.isFiltered) {
         cell.textLabel.text = self.filteredStreets[indexPath.row];
@@ -154,10 +156,12 @@
     
     // Animate down
     [UIView animateWithDuration:0.5 animations:^{
+        
+        // Move everything back to original frames
+        self.instructionsLabel.frame = self.instructionsLabelOriginalFrame;
+        self.numberTextField.frame = self.numberTextFieldOriginalFrame;
         self.streetSearchBar.frame = self.streetSearchBarOriginalFrame;
-        NSLog(@"self.streetSearchBar.frame %@", NSStringFromCGRect(self.streetSearchBar.frame));
         self.streetTableView.frame = self.streetTableViewOriginalFrame;
-        NSLog(@"self.streetTableView.frame %@", NSStringFromCGRect(self.streetTableView.frame));
         self.searchBarAnimatedUp = NO;
     }];
 }
@@ -173,10 +177,18 @@
         
         // Animate up
         [UIView animateWithDuration:0.5 animations:^{
-            self.streetSearchBar.frame = CGRectMake(0, 0, self.streetSearchBar.frame.size.width, self.streetSearchBar.frame.size.height);
-            NSLog(@"self.streetSearchBar.frame %@", NSStringFromCGRect(self.streetSearchBar.frame));
-            self.streetTableView.frame = CGRectMake(0, self.streetSearchBar.frame.size.height, self.streetTableView.frame.size.width, self.streetTableView.frame.size.height);
-            NSLog(@"self.streetTableView.frame %@", NSStringFromCGRect(self.streetTableView.frame));
+            
+            // Move instructionsLabel off screen
+            self.instructionsLabel.frame = CGRectMake(self.instructionsLabel.frame.origin.x, 0 - self.instructionsLabel.frame.size.height, self.instructionsLabel.frame.size.width, self.instructionsLabel.frame.size.height);
+            
+            // Move numberTextField off screen
+            self.numberTextField.frame = CGRectMake(self.numberTextField.frame.origin.x, 0 - self.numberTextField.frame.size.height, self.numberTextField.frame.size.width, self.numberTextField.frame.size.height);
+            
+            // Move streetSearchBar up to where instructionsLabel was
+            self.streetSearchBar.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y, self.streetSearchBar.frame.size.width, self.streetSearchBar.frame.size.height);
+            
+            // Move streetTableView to below streetSearchBar
+            self.streetTableView.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y + self.streetSearchBar.frame.size.height, self.streetTableView.frame.size.width, self.streetTableView.frame.size.height);
         }];
     }
     return YES;

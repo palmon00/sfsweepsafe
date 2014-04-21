@@ -111,8 +111,8 @@
     cell.detailTextLabel.font = [UIFont fontWithName:@"Copperplate" size:10.0];
     
     // Set color
-    cell.textLabel.textColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
-    cell.detailTextLabel.textColor = [UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
+    cell.textLabel.textColor = [UIColor TINT_COLOR]; //colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
+    cell.detailTextLabel.textColor = [UIColor TINT_COLOR]; // colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:1.0];
     
     // Configure the cell...
     if (indexPath.row == 0 && self.multipleMatches) {
