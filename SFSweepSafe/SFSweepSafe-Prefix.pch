@@ -14,4 +14,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #define TINT_COLOR blackColor
+    #define MOTION_EFFECT_MIN -10
+    #define MOTION_EFFECT_MAX +10
 #endif

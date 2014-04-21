@@ -72,6 +72,8 @@
                     <navigationItem key="navigationItem" title="SF Sweep Safe" id="DJ3-Jj-V3I"/>
                     <connections>
                         <outlet property="activityIndicator" destination="MPt-VF-7T1" id="umz-x8-Pwx"/>
+                        <outlet property="instructionsLabel" destination="a1g-1m-tgO" id="swT-Yk-zEw"/>
+                        <outlet property="parkedButton" destination="REV-AV-NrO" id="AUw-mX-wAo"/>
                         <outlet property="searchingLabel" destination="9OJ-67-6BY" id="lEd-Lm-VFk"/>
                         <segue destination="8kL-Mn-VS2" kind="push" identifier="Confirm Location" id="AS2-TC-FNO"/>
                         <segue destination="XJ6-gl-3Qg" kind="push" identifier="Enter Location" id="fpH-Rs-KPD"/>
@@ -450,9 +452,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="beforeThenLabel" destination="s1K-Nf-ETx" id="Dnj-Pp-Ndl"/>
                         <outlet property="doneBarButton" destination="Gcw-ql-PfD" id="T9A-bt-k9y"/>
                         <outlet property="reminderIntervalSegmentedControl" destination="ZKT-wl-2sa" id="kcK-Ep-R7C"/>
                         <outlet property="reminderSummaryTextView" destination="KlM-rj-dZp" id="Mlg-f6-8tN"/>
+                        <outlet property="setReminderButton" destination="yVh-Dh-Dsk" id="eyk-0M-dXa"/>
+                        <outlet property="setReminderLabel" destination="Yrg-kQ-PKg" id="tuX-Wz-VkD"/>
                         <outlet property="warningTextView" destination="a9j-w5-dv2" id="fV4-ob-Lxm"/>
                     </connections>
                 </viewController>
@@ -686,8 +691,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Confirm Address" id="htS-lh-zPS"/>
                     <connections>
+                        <outlet property="instructionsLabel" destination="ziX-2n-TqE" id="Thd-7l-oXb"/>
+                        <outlet property="noButton" destination="h8x-et-PTc" id="gy1-Ph-452"/>
                         <outlet property="numberLabel" destination="M9T-QY-wtw" id="EG3-5V-Gyn"/>
                         <outlet property="streetLabel" destination="TB6-p9-ta4" id="Yb1-QM-e6L"/>
+                        <outlet property="yesButton" destination="lCg-RK-aqM" id="7FF-qq-Np5"/>
                         <segue destination="XJ6-gl-3Qg" kind="push" identifier="Wrong Location" id="Tcl-6b-pLA"/>
                         <segue destination="nUE-7d-k9w" kind="push" identifier="Confirmed Location" id="B5M-OK-SMB"/>
                     </connections>
@@ -728,8 +736,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fpH-Rs-KPD"/>
-        <segue reference="P19-xc-D89"/>
+        <segue reference="B5M-OK-SMB"/>
+        <segue reference="Tcl-6b-pLA"/>
         <segue reference="C6e-s1-oUy"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -14,11 +14,12 @@
 
 @interface SFSSStreetCleaningResultsViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) NSArray *matchingPlacemarks;
-@property (strong, nonatomic) NSMutableArray *selectedPlacemarks; // of SFSSPlacemark
+@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
-@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
+
+@property (strong, nonatomic) NSArray *matchingPlacemarks;
+@property (strong, nonatomic) NSMutableArray *selectedPlacemarks; // of SFSSPlacemark
 
 @property (nonatomic) BOOL multipleMatches;
 @property (nonatomic) BOOL didSelectAll;
@@ -65,6 +66,20 @@
     self.didSelectAll = NO;
     
     if (![self.matchingPlacemarks count]) self.instructionsLabel.text = @"No matching street cleaning times";
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    horizontalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    verticalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    [self.instructionsLabel addMotionEffect:horizontalMotionEffect];
+    [self.instructionsLabel addMotionEffect:verticalMotionEffect];
+    [self.tableView addMotionEffect:horizontalMotionEffect];
+    [self.tableView addMotionEffect:verticalMotionEffect];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -176,7 +191,9 @@
         [tableView cellForRowAtIndexPath:indexPath].textLabel.text = @"Select all";
         self.didSelectAll = NO;
     } else if ([cellText isEqualToString:@"Enter my own values"]) {
-        // Should never happen
+        // Should never happen but just in case, segue
+        [self.tableView cellForRowAtIndexPath:indexPath].selected = NO;
+        [self performSegueWithIdentifier:@"Enter Street Cleaning" sender:nil];
     } else {
         [self.selectedPlacemarks removeObject:self.matchingPlacemarks[indexPath.row - self.multipleMatches]];
     }
@@ -193,6 +210,7 @@
     if ([segue.identifier isEqualToString:@"Selected Street Cleaning"]) {
         SFSSSetReminderViewController *savc = segue.destinationViewController;
         savc.placemarks = self.selectedPlacemarks;
+        NSLog(@"Placemarks are %@", self.selectedPlacemarks);
         savc.number = self.number;
         savc.street = self.street;
     } else if ([segue.identifier isEqualToString:@"Enter Street Cleaning"]) {

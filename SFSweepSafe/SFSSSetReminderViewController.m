@@ -13,7 +13,10 @@
 
 @interface SFSSSetReminderViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *warningTextView;
+@property (weak, nonatomic) IBOutlet UILabel *setReminderLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *reminderIntervalSegmentedControl;
+@property (weak, nonatomic) IBOutlet UILabel *beforeThenLabel;
+@property (weak, nonatomic) IBOutlet UIButton *setReminderButton;
 @property (weak, nonatomic) IBOutlet UITextView *reminderSummaryTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
 
@@ -78,6 +81,7 @@
         for (SFSSPlacemark *placemark in _placemarks) {
             // get weekDay of street cleaning
             NSInteger cleaningWeekDay = [dates indexOfObject:placemark.date] + 1;
+            NSLog(@"cleaningWeekDay is %d", cleaningWeekDay);
             
             // get fromHour of street cleaning
             NSInteger cleaningHour = placemark.fromHour;
@@ -187,6 +191,28 @@
     
     // Disable done button
     self.doneBarButton.enabled = NO;
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    horizontalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    verticalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    [self.warningTextView addMotionEffect:horizontalMotionEffect];
+    [self.warningTextView addMotionEffect:verticalMotionEffect];
+    [self.setReminderLabel addMotionEffect:horizontalMotionEffect];
+    [self.setReminderLabel addMotionEffect:verticalMotionEffect];
+    [self.reminderIntervalSegmentedControl addMotionEffect:horizontalMotionEffect];
+    [self.reminderIntervalSegmentedControl addMotionEffect:verticalMotionEffect];
+    [self.beforeThenLabel addMotionEffect:horizontalMotionEffect];
+    [self.beforeThenLabel addMotionEffect:verticalMotionEffect];
+    [self.setReminderButton addMotionEffect:horizontalMotionEffect];
+    [self.setReminderButton addMotionEffect:verticalMotionEffect];
+    [self.reminderSummaryTextView addMotionEffect:horizontalMotionEffect];
+    [self.reminderSummaryTextView addMotionEffect:verticalMotionEffect];
 }
 
 #pragma mark - Reminder and Local Notif

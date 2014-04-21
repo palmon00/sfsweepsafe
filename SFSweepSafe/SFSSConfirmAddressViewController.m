@@ -10,9 +10,12 @@
 #import "SFSSStreetCleaningResultsViewController.h"
 
 @interface SFSSConfirmAddressViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *numberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *streetLabel;
+@property (weak, nonatomic) IBOutlet UIButton *yesButton;
+@property (weak, nonatomic) IBOutlet UIButton *noButton;
 
 @end
 
@@ -26,6 +29,27 @@
     
     self.numberLabel.text = self.number;
     self.streetLabel.text = self.street;
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    horizontalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    verticalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    [self.instructionsLabel addMotionEffect:horizontalMotionEffect];
+    [self.instructionsLabel addMotionEffect:verticalMotionEffect];
+    [self.numberLabel addMotionEffect:horizontalMotionEffect];
+    [self.numberLabel addMotionEffect:verticalMotionEffect];
+    [self.streetLabel addMotionEffect:horizontalMotionEffect];
+    [self.streetLabel addMotionEffect:verticalMotionEffect];
+    [self.yesButton addMotionEffect:horizontalMotionEffect];
+    [self.yesButton addMotionEffect:verticalMotionEffect];
+    [self.noButton addMotionEffect:horizontalMotionEffect];
+    [self.noButton addMotionEffect:verticalMotionEffect];
+
 }
 
 #pragma mark - Navigation

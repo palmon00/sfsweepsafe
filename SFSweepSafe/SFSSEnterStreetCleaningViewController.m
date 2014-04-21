@@ -46,6 +46,28 @@
     // Set fonts
     self.fromHourTextField.font = [UIFont fontWithName:@"Copperplate" size:14.0];
     self.toHourTextField.font = [UIFont fontWithName:@"Copperplate" size:14.0];
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    horizontalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    verticalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    [self.fromHourTextField addMotionEffect:horizontalMotionEffect];
+    [self.fromHourTextField addMotionEffect:verticalMotionEffect];
+    [self.toHourTextField addMotionEffect:horizontalMotionEffect];
+    [self.toHourTextField addMotionEffect:verticalMotionEffect];
+    [self.fromHourAMPM addMotionEffect:horizontalMotionEffect];
+    [self.fromHourAMPM addMotionEffect:verticalMotionEffect];
+    [self.toHourAMPM addMotionEffect:horizontalMotionEffect];
+    [self.toHourAMPM addMotionEffect:verticalMotionEffect];
+    [self.weeksOfMonth addMotionEffect:horizontalMotionEffect];
+    [self.weeksOfMonth addMotionEffect:verticalMotionEffect];
+    [self.weekday addMotionEffect:horizontalMotionEffect];
+    [self.weekday addMotionEffect:verticalMotionEffect];
 }
 
 #pragma mark - Helper Methods
@@ -129,8 +151,20 @@
         NSArray *dates = [SFSSPlacemark dates];
         
         NSString *date = dates[self.weekday.selectedSegmentIndex];
-        NSInteger fromHour = self.fromHourAMPM.selectedSegmentIndex ? [self.fromHourTextField.text integerValue] + 12 : [self.fromHourTextField.text integerValue];
-        NSInteger toHour = self.toHourAMPM.selectedSegmentIndex ? [self.toHourTextField.text integerValue] + 12 : [self.toHourTextField.text integerValue];
+        NSLog(@"Date is %@", date);
+        
+        // Convert times into integers
+        NSInteger fromHour = [self.fromHourTextField.text integerValue];
+        NSInteger toHour = [self.toHourTextField.text integerValue];
+
+        // If times are 12, set them to 0 for easier calculations
+        // 12 pm = 0 pm, 12am = 0am
+        if (fromHour == 12) fromHour = 0;
+        if (toHour == 12) toHour = 0;
+        
+        // Convert fromHour and toHour to 24 hour time
+        fromHour = self.fromHourAMPM.selectedSegmentIndex ? fromHour + 12 : fromHour;
+        toHour = self.toHourAMPM.selectedSegmentIndex ? toHour + 12 : toHour;
         
         NSString *weeksOfMonth = nil;
         switch (self.weeksOfMonth.selectedSegmentIndex) {

@@ -43,6 +43,24 @@
     // Set fonts
     self.numberTextField.font = [UIFont fontWithName:@"Copperplate" size:14.0];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont fontWithName:@"Copperplate" size:14.0]];
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    horizontalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    verticalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    [self.instructionsLabel addMotionEffect:horizontalMotionEffect];
+    [self.instructionsLabel addMotionEffect:verticalMotionEffect];
+    [self.numberTextField addMotionEffect:horizontalMotionEffect];
+    [self.numberTextField addMotionEffect:verticalMotionEffect];
+    [self.streetSearchBar addMotionEffect:horizontalMotionEffect];
+    [self.streetSearchBar addMotionEffect:verticalMotionEffect];
+    [self.streetTableView addMotionEffect:horizontalMotionEffect];
+    [self.streetTableView addMotionEffect:verticalMotionEffect];
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -13,10 +13,13 @@
 
 @interface SFSSParkedViewController () <CLLocationManagerDelegate>
 
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *userLocation;
+@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
+@property (weak, nonatomic) IBOutlet UIButton *parkedButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *searchingLabel;
+
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation *userLocation;
 
 @property (nonatomic) BOOL imParkedPressed; // used to tell when to segue immediately upon user location changes or errors
 @property (nonatomic) BOOL didSegue; // used to prevent duplicate segues due to multiple asynchronous geocoding calls
@@ -39,6 +42,29 @@
 }
 
 #pragma mark - Lifecycle
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // Add motion effects
+    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+    horizontalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    horizontalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+    verticalMotionEffect.minimumRelativeValue = @(MOTION_EFFECT_MIN);
+    verticalMotionEffect.maximumRelativeValue = @(MOTION_EFFECT_MAX);
+    
+    [self.instructionsLabel addMotionEffect:horizontalMotionEffect];
+    [self.instructionsLabel addMotionEffect:verticalMotionEffect];
+    [self.parkedButton addMotionEffect:horizontalMotionEffect];
+    [self.parkedButton addMotionEffect:verticalMotionEffect];
+    [self.activityIndicator addMotionEffect:horizontalMotionEffect];
+    [self.activityIndicator addMotionEffect:verticalMotionEffect];
+    [self.searchingLabel addMotionEffect:horizontalMotionEffect];
+    [self.searchingLabel addMotionEffect:verticalMotionEffect];
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
