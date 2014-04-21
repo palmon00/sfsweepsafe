@@ -14,7 +14,6 @@
 		1E7390AE190098F700191E0F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7390AD190098F700191E0F /* main.m */; };
 		1E7390B2190098F700191E0F /* SFSSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7390B1190098F700191E0F /* SFSSAppDelegate.m */; };
 		1E7390B5190098F700191E0F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7390B3190098F700191E0F /* Main_iPhone.storyboard */; };
-		1E7390B8190098F700191E0F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E7390B6190098F700191E0F /* Main_iPad.storyboard */; };
 		1E7390BD190098F700191E0F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E7390BC190098F700191E0F /* Images.xcassets */; };
 		1E7390C4190098F700191E0F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7390C3190098F700191E0F /* XCTest.framework */; };
 		1E7390C5190098F700191E0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E7390A1190098F700191E0F /* Foundation.framework */; };
@@ -106,7 +105,6 @@
 		1E7390B0190098F700191E0F /* SFSSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFSSAppDelegate.h; sourceTree = "<group>"; };
 		1E7390B1190098F700191E0F /* SFSSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFSSAppDelegate.m; sourceTree = "<group>"; };
 		1E7390B4190098F700191E0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		1E7390B7190098F700191E0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		1E7390BC190098F700191E0F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		1E7390C2190098F700191E0F /* SFSweepSafeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SFSweepSafeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7390C3190098F700191E0F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -250,7 +248,6 @@
 				1EE12C6A19021F7500EE24CE /* SFSSRootViewController.m */,
 				1EE12C6619021E6700EE24CE /* SFSSPageContentViewController.h */,
 				1EE12C6719021E6700EE24CE /* SFSSPageContentViewController.m */,
-				1E7390B6190098F700191E0F /* Main_iPad.storyboard */,
 				1E8E0DE11900ED4600DBC329 /* SFSSSetAlarmViewController.h */,
 				1E8E0DE21900ED4600DBC329 /* SFSSSetAlarmViewController.m */,
 				1E8E0DDE1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.h */,
@@ -454,7 +451,6 @@
 				1EC42FD219033D5900853297 /* home.gpx in Resources */,
 				1E8E0E1F1901042C00DBC329 /* N in Resources */,
 				1E8E0E2A1901042C00DBC329 /* X in Resources */,
-				1E7390B8190098F700191E0F /* Main_iPad.storyboard in Resources */,
 				1E8E0E181901042C00DBC329 /* G in Resources */,
 				1E8E0E271901042C00DBC329 /* U in Resources */,
 				1EC42FDB19033F9A00853297 /* northbeach.gpx in Resources */,
@@ -561,14 +557,6 @@
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
-		1E7390B6190098F700191E0F /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1E7390B7190098F700191E0F /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
 		1E7390CC190098F700191E0F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -661,6 +649,7 @@
 				GCC_PREFIX_HEADER = "SFSweepSafe/SFSweepSafe-Prefix.pch";
 				INFOPLIST_FILE = "SFSweepSafe/SFSweepSafe-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -674,6 +663,7 @@
 				GCC_PREFIX_HEADER = "SFSweepSafe/SFSweepSafe-Prefix.pch";
 				INFOPLIST_FILE = "SFSweepSafe/SFSweepSafe-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
