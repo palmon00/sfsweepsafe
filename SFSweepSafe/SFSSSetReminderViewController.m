@@ -81,7 +81,7 @@
         for (SFSSPlacemark *placemark in _placemarks) {
             // get weekDay of street cleaning
             NSInteger cleaningWeekDay = [dates indexOfObject:placemark.date] + 1;
-            NSLog(@"cleaningWeekDay is %d", cleaningWeekDay);
+            NSLog(@"cleaningWeekDay is %d", (int)cleaningWeekDay);
             
             // get fromHour of street cleaning
             NSInteger cleaningHour = placemark.fromHour;

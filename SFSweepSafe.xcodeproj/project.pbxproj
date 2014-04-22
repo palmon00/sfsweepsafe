@@ -243,28 +243,9 @@
 		1E7390A7190098F700191E0F /* SFSweepSafe */ = {
 			isa = PBXGroup;
 			children = (
-				1E7390B3190098F700191E0F /* Main_iPhone.storyboard */,
-				1EE12C6919021F7500EE24CE /* SFSSRootViewController.h */,
-				1EE12C6A19021F7500EE24CE /* SFSSRootViewController.m */,
-				1EE12C6619021E6700EE24CE /* SFSSPageContentViewController.h */,
-				1EE12C6719021E6700EE24CE /* SFSSPageContentViewController.m */,
-				1E8E0DE11900ED4600DBC329 /* SFSSSetReminderViewController.h */,
-				1E8E0DE21900ED4600DBC329 /* SFSSSetReminderViewController.m */,
-				1E8E0DDE1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.h */,
-				1E8E0DDF1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.m */,
-				1E7390E41900B48B00191E0F /* SFSSStreetCleaningResultsViewController.h */,
-				1E7390E51900B48B00191E0F /* SFSSStreetCleaningResultsViewController.m */,
-				1E7390E11900AD6B00191E0F /* SFSSEnterAddressViewController.h */,
-				1E7390E21900AD6B00191E0F /* SFSSEnterAddressViewController.m */,
-				1E7390DE1900A8D200191E0F /* SFSSConfirmAddressViewController.h */,
-				1E7390DF1900A8D200191E0F /* SFSSConfirmAddressViewController.m */,
-				1E7390D91900A6CE00191E0F /* SFSSParkedViewController.h */,
-				1E7390DA1900A6CE00191E0F /* SFSSParkedViewController.m */,
-				1E7390BC190098F700191E0F /* Images.xcassets */,
-				1E8E0DDB1900DE0E00DBC329 /* SFSSPlacemarkCollection.h */,
-				1E8E0DDC1900DE0E00DBC329 /* SFSSPlacemarkCollection.m */,
-				1E7390E71900D81400191E0F /* SFSSPlacemark.h */,
-				1E7390E81900D81400191E0F /* SFSSPlacemark.m */,
+				1E9C42CD190601F900E10BCA /* Views */,
+				1E9C42CB190601C900E10BCA /* Controllers */,
+				1E9C42CA190601BD00E10BCA /* Models */,
 				1E7390A8190098F700191E0F /* Supporting Files */,
 			);
 			path = SFSweepSafe;
@@ -273,9 +254,11 @@
 		1E7390A8190098F700191E0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E8E0DE41901042C00DBC329 /* Data */,
+				1E7390BC190098F700191E0F /* Images.xcassets */,
+				1E9C42761904CF7700E10BCA /* SF_Bay_Unsplash_Left.png */,
 				1E9C42801904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Left.png */,
 				1E9C42811904FFFB00E10BCA /* SF_Bay_Unsplash_Mid_Right.png */,
-				1E9C42761904CF7700E10BCA /* SF_Bay_Unsplash_Left.png */,
 				1E9C42791904CF7700E10BCA /* SF_Bay_Unsplash_Right.png */,
 				1E8E0E2D190104AE00DBC329 /* SFStreetSweeping152.png */,
 				1EC42FCF19033D5900853297 /* home.gpx */,
@@ -283,7 +266,6 @@
 				1EC42FD419033E6400853297 /* mission.gpx */,
 				1EC42FD819033F4900853297 /* nobhill.gpx */,
 				1EC42FDA19033F9A00853297 /* northbeach.gpx */,
-				1E8E0DE41901042C00DBC329 /* Data */,
 				1E7390B0190098F700191E0F /* SFSSAppDelegate.h */,
 				1E7390B1190098F700191E0F /* SFSSAppDelegate.m */,
 				1E7390A9190098F700191E0F /* SFSweepSafe-Info.plist */,
@@ -357,6 +339,56 @@
 				1E8E0E081901042C00DBC329 /* Z */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		1E9C42CA190601BD00E10BCA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1E8E0DDB1900DE0E00DBC329 /* SFSSPlacemarkCollection.h */,
+				1E8E0DDC1900DE0E00DBC329 /* SFSSPlacemarkCollection.m */,
+				1E7390E71900D81400191E0F /* SFSSPlacemark.h */,
+				1E7390E81900D81400191E0F /* SFSSPlacemark.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		1E9C42CB190601C900E10BCA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E9C42CC190601DA00E10BCA /* Intro */,
+				1E8E0DE11900ED4600DBC329 /* SFSSSetReminderViewController.h */,
+				1E8E0DE21900ED4600DBC329 /* SFSSSetReminderViewController.m */,
+				1E8E0DDE1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.h */,
+				1E8E0DDF1900ECC900DBC329 /* SFSSEnterStreetCleaningViewController.m */,
+				1E7390E41900B48B00191E0F /* SFSSStreetCleaningResultsViewController.h */,
+				1E7390E51900B48B00191E0F /* SFSSStreetCleaningResultsViewController.m */,
+				1E7390E11900AD6B00191E0F /* SFSSEnterAddressViewController.h */,
+				1E7390E21900AD6B00191E0F /* SFSSEnterAddressViewController.m */,
+				1E7390DE1900A8D200191E0F /* SFSSConfirmAddressViewController.h */,
+				1E7390DF1900A8D200191E0F /* SFSSConfirmAddressViewController.m */,
+				1E7390D91900A6CE00191E0F /* SFSSParkedViewController.h */,
+				1E7390DA1900A6CE00191E0F /* SFSSParkedViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		1E9C42CC190601DA00E10BCA /* Intro */ = {
+			isa = PBXGroup;
+			children = (
+				1EE12C6919021F7500EE24CE /* SFSSRootViewController.h */,
+				1EE12C6A19021F7500EE24CE /* SFSSRootViewController.m */,
+				1EE12C6619021E6700EE24CE /* SFSSPageContentViewController.h */,
+				1EE12C6719021E6700EE24CE /* SFSSPageContentViewController.m */,
+			);
+			name = Intro;
+			sourceTree = "<group>";
+		};
+		1E9C42CD190601F900E10BCA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E7390B3190098F700191E0F /* Main_iPhone.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
