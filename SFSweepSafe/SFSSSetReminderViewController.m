@@ -228,8 +228,11 @@
     event.endDate = reminderEndDate;
     event.availability = EKEventAvailabilityBusy;
     event.title = @"Move my car";
+    NSLog(@"Move my car");
     event.location = [NSString stringWithFormat:@"%@ %@ San Francisco, California", self.number, self.street];
+    NSLog(@"%@ %@ San Francisco, California", self.number, self.street);
     event.notes = [NSString stringWithFormat:@"SF Sweep Safe\nReminder to move your car at %@ %@ San Francisco, California\n\nStreet cleaning will take place at %@", self.number, self.street, [self.dateFormatter stringFromDate:self.closestStreetCleaningDate]];
+    NSLog(@"SF Sweep Safe\nReminder to move your car at %@ %@ San Francisco, California\n\nStreet cleaning will take place at %@", self.number, self.street, [self.dateFormatter stringFromDate:self.closestStreetCleaningDate]);
     
     // Add an alarm
     EKAlarm *alarm = [EKAlarm alarmWithAbsoluteDate:reminderDate];
@@ -243,7 +246,7 @@
             // Update reminder summary view
             NSString *newreminderText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:reminderDate]];
             dispatch_async(dispatch_get_main_queue(), ^{
-            self.reminderSummaryTextView.text = [self.reminderSummaryTextView.text stringByAppendingString:newreminderText];
+                self.reminderSummaryTextView.text = [self.reminderSummaryTextView.text stringByAppendingString:newreminderText];
                 self.doneBarButton.enabled = YES;
             });
             return YES;
@@ -260,15 +263,16 @@
 
 - (void)scheduleLocalNotifForDate:(NSDate *)reminderDate
 {
-    // Error saving, permission not granted or error requesting access; set a local notif
     // Set a local notification for closetsStreetCleaningDate
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     
     // Configure reminder
     localNotif.fireDate = reminderDate;
     localNotif.alertAction = [NSString stringWithFormat:@"Street cleaning in %@.", [self.reminderIntervalSegmentedControl titleForSegmentAtIndex:self.reminderIntervalSegmentedControl.selectedSegmentIndex]];
-    localNotif.alertBody = [NSString stringWithFormat:@"Your car is parked at %@ %@.", self.number, self.street];
-    localNotif.alertLaunchImage = @"SFStreetSweeping152.png";
+    NSLog(@"Street cleaning in %@.", [self.reminderIntervalSegmentedControl titleForSegmentAtIndex:self.reminderIntervalSegmentedControl.selectedSegmentIndex]);
+    localNotif.alertBody = [NSString stringWithFormat:@"Move your car at %@ %@.", self.number, self.street];
+    NSLog(@"Move your car at %@ %@.", self.number, self.street);
+    //    localNotif.alertLaunchImage = @"";
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     
     // Update reminder summary view
@@ -318,7 +322,7 @@
                     if ([self scheduleEventForDate:reminderDate withEventStore:eventStore]) return;
                 } else {
                     // Permission not granted
-                    NSLog(@"requestAccessToEntityType permission not granted");
+                    NSLog(@"requestAccessToEntityType:EKEntityTypeEvent permission not granted");
                 }
             } else {
                 // Error occurred requesting access

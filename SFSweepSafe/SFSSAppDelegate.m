@@ -41,8 +41,9 @@
     // Change bar button item fonts
     NSDictionary *barButtonAppearanceDict = @{NSFontAttributeName : [UIFont fontWithName:@"Copperplate" size:20.0]}; // , NSForegroundColorAttributeName: [UIColor blackColor]};
     [[UIBarButtonItem appearance] setTitleTextAttributes:barButtonAppearanceDict forState:UIControlStateNormal];
+    
+    // Set segementedControl text appearance
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Copperplate" size:12.0]} forState:UIControlStateNormal];
-//    [[UILabel appearanceWhenContainedIn:[UISegmentedControl class], nil] setFont:[UIFont fontWithName:@"Copperplate" size:12.0]];
     
     return YES;
 }

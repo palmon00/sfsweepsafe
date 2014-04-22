@@ -68,7 +68,6 @@
                             <constraint firstItem="9OJ-67-6BY" firstAttribute="top" secondItem="MPt-VF-7T1" secondAttribute="bottom" constant="8" id="u3i-Xh-y4P"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" title="SF Sweep Safe" id="DJ3-Jj-V3I"/>
                     <connections>
                         <outlet property="activityIndicator" destination="MPt-VF-7T1" id="umz-x8-Pwx"/>
@@ -736,8 +735,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="B5M-OK-SMB"/>
-        <segue reference="fpH-Rs-KPD"/>
+        <segue reference="Tcl-6b-pLA"/>
+        <segue reference="P19-xc-D89"/>
         <segue reference="C6e-s1-oUy"/>
     </inferredMetricsTieBreakers>
 </document>
