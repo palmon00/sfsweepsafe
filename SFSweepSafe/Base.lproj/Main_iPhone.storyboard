@@ -68,9 +68,7 @@
                             <constraint firstItem="9OJ-67-6BY" firstAttribute="top" secondItem="MPt-VF-7T1" secondAttribute="bottom" constant="8" id="u3i-Xh-y4P"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="SF Sweep Safe" id="DJ3-Jj-V3I">
-                        <barButtonItem key="leftBarButtonItem" title="About" id="MzJ-f4-hIM"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="SF Sweep Safe" id="DJ3-Jj-V3I"/>
                     <connections>
                         <outlet property="activityIndicator" destination="MPt-VF-7T1" id="umz-x8-Pwx"/>
                         <outlet property="instructionsLabel" destination="a1g-1m-tgO" id="swT-Yk-zEw"/>
@@ -741,6 +739,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="fpH-Rs-KPD"/>
         <segue reference="P19-xc-D89"/>
-        <segue reference="C6e-s1-oUy"/>
+        <segue reference="7Ey-dV-KxO"/>
     </inferredMetricsTieBreakers>
 </document>

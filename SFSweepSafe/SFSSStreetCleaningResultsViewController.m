@@ -82,22 +82,26 @@
     [self.tableView addMotionEffect:verticalMotionEffect];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    // If only one match, reset selectedPlacemarks
-    if (!self.multipleMatches) self.selectedPlacemarks = nil;
+    [super viewWillAppear:animated];
     
     // Update doneBarButton
     [self updateDoneBarButtonState];
+    
+    // If only one match, reset selectedPlacemarks
+    if (!self.multipleMatches) {
+        self.selectedPlacemarks = nil;
+        [self.tableView reloadData];
+    }
 }
 
 #pragma mark - Helper Methods
 
 -(void)updateDoneBarButtonState
 {
-    // Done button will be hidden if one match, visible otherwise
-    if (!self.multipleMatches) self.doneBarButton.title = @"";
-    else self.doneBarButton.title = @"Done";
+    // Remove done bar button for one or fewer matches
+    if ([self.matchingPlacemarks count] <= 1) self.navigationItem.rightBarButtonItem = nil;
     
     // Done button will be disabled if no placemarks have been selected
     self.doneBarButton.enabled = ([self.selectedPlacemarks count] > 0);
