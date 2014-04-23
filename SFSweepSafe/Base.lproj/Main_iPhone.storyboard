@@ -68,7 +68,9 @@
                             <constraint firstItem="9OJ-67-6BY" firstAttribute="top" secondItem="MPt-VF-7T1" secondAttribute="bottom" constant="8" id="u3i-Xh-y4P"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="SF Sweep Safe" id="DJ3-Jj-V3I"/>
+                    <navigationItem key="navigationItem" title="SF Sweep Safe" id="DJ3-Jj-V3I">
+                        <barButtonItem key="leftBarButtonItem" title="About" id="MzJ-f4-hIM"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="MPt-VF-7T1" id="umz-x8-Pwx"/>
                         <outlet property="instructionsLabel" destination="a1g-1m-tgO" id="swT-Yk-zEw"/>
@@ -247,6 +249,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneBarButton" destination="wEg-kH-aqI" id="Zvp-Qs-HPa"/>
                         <outlet property="instructionsLabel" destination="B9W-aZ-oIn" id="UbV-Qz-BRy"/>
                         <outlet property="numberTextField" destination="qyi-Ft-S2c" id="2T4-c3-NIo"/>
                         <outlet property="streetSearchBar" destination="VUG-vd-V8r" id="QCQ-mO-BiB"/>
@@ -594,6 +597,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="doneBarButton" destination="sq9-D9-j4z" id="hZf-gv-8JV"/>
                         <outlet property="fromHourAMPM" destination="S0n-fl-USX" id="IeQ-zg-vaz"/>
                         <outlet property="fromHourTextField" destination="w5X-MB-iKb" id="UwQ-gl-Vgl"/>
                         <outlet property="toHourAMPM" destination="w9V-uD-kUQ" id="7Fp-fi-rZH"/>
@@ -735,7 +739,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Tcl-6b-pLA"/>
+        <segue reference="fpH-Rs-KPD"/>
         <segue reference="P19-xc-D89"/>
         <segue reference="C6e-s1-oUy"/>
     </inferredMetricsTieBreakers>

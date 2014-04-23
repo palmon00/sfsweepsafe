@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#define LOCATION_SEARCH_TIMEOUT 5
+
 @interface SFSSParkedViewController : UIViewController
 
 @end

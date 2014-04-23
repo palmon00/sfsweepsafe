@@ -230,7 +230,7 @@
                 self.searchingLabel.text = @"Searching for your location...";
                 
                 // Wait at most 10 seconds then try to geocode and segue
-                [self performSelector:@selector(geocodeUserLocation) withObject:nil afterDelay:10];
+                [self performSelector:@selector(geocodeUserLocation) withObject:nil afterDelay:LOCATION_SEARCH_TIMEOUT];
             }
         } else {
             

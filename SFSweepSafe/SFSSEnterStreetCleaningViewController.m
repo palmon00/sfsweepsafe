@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *toHourAMPM;
 @property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *weeksOfMonth;
 @property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *weekday;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
 
 @property (nonatomic) BOOL didEditToHour;
 
@@ -71,6 +72,14 @@
     [self.weekday addMotionEffect:verticalMotionEffect];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Update done bar button state
+    [self updateDoneBarButtonStateForFromHour:self.fromHourTextField.text andToHour:self.toHourTextField.text];
+}
+
 #pragma mark - Helper Methods
 
 -(void)updateToHourBasedOnFromHourString:(NSString *)fromHourString
@@ -92,11 +101,18 @@
 
 }
 
+- (void)updateDoneBarButtonStateForFromHour:(NSString *)fromHour andToHour:(NSString *)toHour
+{
+    self.doneBarButton.enabled = [fromHour length] && [toHour length];
+}
+
+
 #pragma mark - UIControl
 
 -(void)didChangeSegmentedControl:(UIControl *)sender
 {
 //    NSLog(@"Segmented Control %@ touched", sender);
+    
     // For fromHourAMPM, if toHour has not been edited also update toHour and toHourAMPM
     if (!self.didEditToHour && [(UISegmentedControl *)sender isEqual:self.fromHourAMPM]) {
         [self updateToHourBasedOnFromHourString:self.fromHourTextField.text];
@@ -118,9 +134,9 @@
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     
     if ([newString length]) {
-        NSInteger newTime = [newString integerValue];
         
         // Only accept 1-12 for either field
+        NSInteger newTime = [newString integerValue];
         if (1 <= newTime && newTime <= 12) {
             
             // For fromHour, if toHour has not been edited also update toHour and toHourAMPM
@@ -132,12 +148,16 @@
             // Flag edits in toHour
             if ([textField isEqual:self.toHourTextField]) self.didEditToHour = YES;
             
-            // All hours 1-12 are valid
-            return YES;
-        } else return NO; // hours outside 1-12 are invalid
+        } else {
+            
+            // hours outside 1-12 are invalid
+            return NO;
+        }
     }
     
-    // empty strings are also valid
+    // Update Done Bar Button based on changed field
+    [textField isEqual:self.fromHourTextField] ? [self updateDoneBarButtonStateForFromHour:newString andToHour:self.toHourTextField.text] : [self updateDoneBarButtonStateForFromHour:self.fromHourTextField.text andToHour:newString];
+    
     return YES;
 }
 

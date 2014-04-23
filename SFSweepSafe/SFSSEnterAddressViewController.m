@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 @property (weak, nonatomic) IBOutlet UISearchBar *streetSearchBar;
 @property (weak, nonatomic) IBOutlet UITableView *streetTableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBarButton;
 
 
 @property (nonatomic) CGRect instructionsLabelOriginalFrame;
@@ -40,6 +41,10 @@
     self.streetTableView.delegate = self;
     self.streetSearchBar.delegate = self;
     
+    // Initialize data
+    [self loadStreets];
+    [self.streetTableView reloadData];
+
     // Set fonts
     self.numberTextField.font = [UIFont fontWithName:@"Copperplate" size:14.0];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont fontWithName:@"Copperplate" size:14.0]];
@@ -61,22 +66,6 @@
     [self.streetSearchBar addMotionEffect:verticalMotionEffect];
     [self.streetTableView addMotionEffect:horizontalMotionEffect];
     [self.streetTableView addMotionEffect:verticalMotionEffect];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self loadStreets];
-    [self.streetTableView reloadData];
-    
-    // Start with data entry in number text field
-    [self.numberTextField becomeFirstResponder];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
     
     // Store original frames for animation
     self.instructionsLabelOriginalFrame = self.instructionsLabel.frame;
@@ -84,8 +73,19 @@
     self.streetSearchBarOriginalFrame = self.streetSearchBar.frame;
     self.streetTableViewOriginalFrame = self.streetTableView.frame;
     
+    // Start with data entry in number text field
+    [self.numberTextField becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     // Search bar is always down when view appears
     self.searchBarAnimatedUp = NO;
+    
+    // Update done bar button state
+    [self updateDoneBarButtonState];
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,6 +132,11 @@
             self.streetTableView.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y + self.streetSearchBar.frame.size.height, self.streetTableView.frame.size.width, self.streetTableView.frame.size.height + self.streetSearchBarOriginalFrame.origin.y - self.instructionsLabelOriginalFrame.origin.y);
         }];
     }
+}
+
+- (void)updateDoneBarButtonState
+{
+    self.doneBarButton.enabled = [self.numberTextField.text length] && [self.streetSearchBar.text length];
 }
 
 #pragma mark - Navigation
@@ -206,6 +211,9 @@
         self.streetTableView.frame = self.streetTableViewOriginalFrame;
         self.searchBarAnimatedUp = NO;
     }];
+    
+    // Update done bar button state
+    [self updateDoneBarButtonState];
 }
 
 #pragma mark - UISearchBar Delegate
@@ -235,6 +243,9 @@
             }
         }
     }
+    
+    // Update done bar button state
+    [self updateDoneBarButtonState];
     
     // Reload data
     [self.streetTableView reloadData];
