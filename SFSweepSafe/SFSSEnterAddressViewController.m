@@ -9,7 +9,7 @@
 #import "SFSSEnterAddressViewController.h"
 #import "SFSSStreetCleaningResultsViewController.h"
 
-@interface SFSSEnterAddressViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface SFSSEnterAddressViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
 @property (weak, nonatomic) IBOutlet UITextField *numberTextField;
 @property (weak, nonatomic) IBOutlet UISearchBar *streetSearchBar;
@@ -110,6 +110,30 @@
     }
 }
 
+- (void)animateSearchBarAndTableViewUp
+{
+    if (!self.searchBarAnimatedUp) { // Prevent double animation
+        self.searchBarAnimatedUp = YES;
+        
+        // Animate up
+        [UIView animateWithDuration:0.5 animations:^{
+            
+            // Move instructionsLabel off screen
+            self.instructionsLabel.frame = CGRectMake(self.instructionsLabel.frame.origin.x, 0 - self.instructionsLabel.frame.size.height, self.instructionsLabel.frame.size.width, self.instructionsLabel.frame.size.height);
+            
+            // Move numberTextField off screen
+            self.numberTextField.frame = CGRectMake(self.numberTextField.frame.origin.x, 0 - self.numberTextField.frame.size.height, self.numberTextField.frame.size.width, self.numberTextField.frame.size.height);
+            
+            // Move streetSearchBar up to where instructionsLabel was
+            self.streetSearchBar.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y, self.streetSearchBar.frame.size.width, self.streetSearchBar.frame.size.height);
+            
+            // Move streetTableView to below streetSearchBar
+            // and extend size of streetTableView to distance moved
+            self.streetTableView.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y + self.streetSearchBar.frame.size.height, self.streetTableView.frame.size.width, self.streetTableView.frame.size.height + self.streetSearchBarOriginalFrame.origin.y - self.instructionsLabelOriginalFrame.origin.y);
+        }];
+    }
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -190,25 +214,8 @@
 {
     NSLog(@"searchBarShouldBeginEditing");
 
-    if (!self.searchBarAnimatedUp) { // Prevent double animation
-        self.searchBarAnimatedUp = YES;
-        
-        // Animate up
-        [UIView animateWithDuration:0.5 animations:^{
-            
-            // Move instructionsLabel off screen
-            self.instructionsLabel.frame = CGRectMake(self.instructionsLabel.frame.origin.x, 0 - self.instructionsLabel.frame.size.height, self.instructionsLabel.frame.size.width, self.instructionsLabel.frame.size.height);
-            
-            // Move numberTextField off screen
-            self.numberTextField.frame = CGRectMake(self.numberTextField.frame.origin.x, 0 - self.numberTextField.frame.size.height, self.numberTextField.frame.size.width, self.numberTextField.frame.size.height);
-            
-            // Move streetSearchBar up to where instructionsLabel was
-            self.streetSearchBar.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y, self.streetSearchBar.frame.size.width, self.streetSearchBar.frame.size.height);
-            
-            // Move streetTableView to below streetSearchBar
-            self.streetTableView.frame = CGRectMake(0, self.instructionsLabelOriginalFrame.origin.y + self.streetSearchBar.frame.size.height, self.streetTableView.frame.size.width, self.streetTableView.frame.size.height);
-        }];
-    }
+    [self animateSearchBarAndTableViewUp];
+    
     return YES;
 }
 
@@ -231,6 +238,24 @@
     
     // Reload data
     [self.streetTableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    NSLog(@"searchBarSearchButtonClicked");
+    [self.streetSearchBar resignFirstResponder];
+}
+
+#pragma mark - UIScrollView Delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"scrollViewWillBeginDragging");
+    [self animateSearchBarAndTableViewUp];
+    
+    // Drop the keyboard
+    if ([self.numberTextField canResignFirstResponder]) [self.numberTextField resignFirstResponder];
+    if ([self.streetSearchBar canResignFirstResponder]) [self.streetSearchBar resignFirstResponder];
 }
 
 #pragma mark - IB Actions

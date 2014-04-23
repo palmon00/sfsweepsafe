@@ -9,14 +9,15 @@
 #import "SFSSEnterStreetCleaningViewController.h"
 #import "SFSSPlacemark.h"
 #import "SFSSSetReminderViewController.h"
+#import "RoundedAndMaskedToBoundsSegmentedControl.h"
 
 @interface SFSSEnterStreetCleaningViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *fromHourTextField;
 @property (weak, nonatomic) IBOutlet UITextField *toHourTextField;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *fromHourAMPM;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *toHourAMPM;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *weeksOfMonth;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *weekday;
+@property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *fromHourAMPM;
+@property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *toHourAMPM;
+@property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *weeksOfMonth;
+@property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *weekday;
 
 @property (nonatomic) BOOL didEditToHour;
 

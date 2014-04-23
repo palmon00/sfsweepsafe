@@ -10,11 +10,12 @@
 #import "SFSSPlacemark.h"
 #import <EventKit/EventKit.h>
 #import "SFSSAppDelegate.h"
+#import "RoundedAndMaskedToBoundsSegmentedControl.h"
 
 @interface SFSSSetReminderViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *warningTextView;
 @property (weak, nonatomic) IBOutlet UILabel *setReminderLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *reminderIntervalSegmentedControl;
+@property (weak, nonatomic) IBOutlet RoundedAndMaskedToBoundsSegmentedControl *reminderIntervalSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *beforeThenLabel;
 @property (weak, nonatomic) IBOutlet UIButton *setReminderButton;
 @property (weak, nonatomic) IBOutlet UITextView *reminderSummaryTextView;

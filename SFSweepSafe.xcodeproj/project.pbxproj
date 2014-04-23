@@ -69,6 +69,7 @@
 		1E9C42D51906322F00E10BCA /* SF_Bay_Unsplash_Mid_Left.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42D11906322F00E10BCA /* SF_Bay_Unsplash_Mid_Left.png */; };
 		1E9C42D61906322F00E10BCA /* SF_Bay_Unsplash_Mid_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42D21906322F00E10BCA /* SF_Bay_Unsplash_Mid_Right.png */; };
 		1E9C42D71906322F00E10BCA /* SF_Bay_Unsplash_Right.png in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C42D31906322F00E10BCA /* SF_Bay_Unsplash_Right.png */; };
+		1E9C46C5190825A900E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9C46C4190825A800E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.m */; };
 		1EC42FD219033D5900853297 /* home.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1EC42FCF19033D5900853297 /* home.gpx */; };
 		1EC42FD319033D5900853297 /* west.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1EC42FD019033D5900853297 /* west.gpx */; };
 		1EC42FD519033E6400853297 /* mission.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1EC42FD419033E6400853297 /* mission.gpx */; };
@@ -167,6 +168,8 @@
 		1E9C42D11906322F00E10BCA /* SF_Bay_Unsplash_Mid_Left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Mid_Left.png; sourceTree = "<group>"; };
 		1E9C42D21906322F00E10BCA /* SF_Bay_Unsplash_Mid_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Mid_Right.png; sourceTree = "<group>"; };
 		1E9C42D31906322F00E10BCA /* SF_Bay_Unsplash_Right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SF_Bay_Unsplash_Right.png; sourceTree = "<group>"; };
+		1E9C46C3190825A800E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedAndMaskedToBoundsSegmentedControl.h; sourceTree = "<group>"; };
+		1E9C46C4190825A800E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedAndMaskedToBoundsSegmentedControl.m; sourceTree = "<group>"; };
 		1EC42FCF19033D5900853297 /* home.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = home.gpx; sourceTree = "<group>"; };
 		1EC42FD019033D5900853297 /* west.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = west.gpx; sourceTree = "<group>"; };
 		1EC42FD419033E6400853297 /* mission.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mission.gpx; sourceTree = "<group>"; };
@@ -252,6 +255,8 @@
 		1E7390A8190098F700191E0F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E9C46C3190825A800E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.h */,
+				1E9C46C4190825A800E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.m */,
 				1E9C42CE1906247600E10BCA /* Images.xcassets */,
 				1E8E0DE41901042C00DBC329 /* Data */,
 				1EC42FCF19033D5900853297 /* home.gpx */,
@@ -543,6 +548,7 @@
 				1EE12C6819021E6700EE24CE /* SFSSPageContentViewController.m in Sources */,
 				1E7390DB1900A6CE00191E0F /* SFSSParkedViewController.m in Sources */,
 				1E7390E31900AD6B00191E0F /* SFSSEnterAddressViewController.m in Sources */,
+				1E9C46C5190825A900E10BCA /* RoundedAndMaskedToBoundsSegmentedControl.m in Sources */,
 				1E8E0DDD1900DE0E00DBC329 /* SFSSPlacemarkCollection.m in Sources */,
 				1EE12C6B19021F7500EE24CE /* SFSSRootViewController.m in Sources */,
 				1E7390E01900A8D200191E0F /* SFSSConfirmAddressViewController.m in Sources */,
