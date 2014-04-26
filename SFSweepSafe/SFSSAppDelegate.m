@@ -7,6 +7,7 @@
 //
 
 #import "SFSSAppDelegate.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface SFSSAppDelegate ()
 
@@ -30,6 +31,9 @@
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     pageControl.backgroundColor = [UIColor whiteColor];
+    
+    // Setup Crashlytics
+    [Crashlytics startWithAPIKey:@"805aee3ac7b0bbf7833c129791482e550dd94488"];
     
     // setup nav bar
     [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];

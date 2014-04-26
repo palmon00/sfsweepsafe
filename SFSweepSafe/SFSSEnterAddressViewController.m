@@ -8,6 +8,7 @@
 
 #import "SFSSEnterAddressViewController.h"
 #import "SFSSStreetCleaningResultsViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface SFSSEnterAddressViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
