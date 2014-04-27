@@ -249,6 +249,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.reminderSummaryTextView.text = [self.reminderSummaryTextView.text stringByAppendingString:newreminderText];
                 self.doneBarButton.enabled = YES;
+                [self.reminderSummaryTextView scrollRangeToVisible:[self.reminderSummaryTextView.text rangeOfString:newreminderText]];
             });
             return YES;
         } else {
@@ -280,6 +281,7 @@
     NSString *newreminderText = [NSString stringWithFormat:@"Reminder set for\n%@\n\n", [self.dateFormatter stringFromDate:reminderDate]];
     dispatch_async(dispatch_get_main_queue(), ^{
         self.reminderSummaryTextView.text = [self.reminderSummaryTextView.text stringByAppendingString:newreminderText];
+        [self.reminderSummaryTextView scrollRangeToVisible:[self.reminderSummaryTextView.text rangeOfString:newreminderText]];
         self.doneBarButton.enabled = YES;
     });
 }
